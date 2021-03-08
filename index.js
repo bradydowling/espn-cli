@@ -162,5 +162,3 @@ const runCli = async () => {
   console.log("Thanks for using the ESPN cli!");
   return;
 }
-
-runCli();
