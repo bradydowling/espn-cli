@@ -7,22 +7,22 @@ import chalk from "chalk";
 import { LocalStorage } from "node-localstorage";
 const localStorage = new LocalStorage('./scratch');
 
-const homepageUrl = "https://espn.com/";
+const espnHomepageUrl = "https://espn.com/";
 const headlineSelector = ".col-three .headlineStack li a";
 const sportsSelector = "#global-nav ul li a";
 
-const getPageContents = async (pageUrl) => {
+export const getPageContents = async (pageUrl) => {
   const response = await axios.get(pageUrl);
   const html = response.data;
   const $cheerioLoader = cheerio.load(html);
   return $cheerioLoader;
 }
 
-const getHeadlines = ($page) => {
+export const getHeadlines = ($page) => {
   const headlines = [];
   $page(headlineSelector).each(function (i, elem) {
     const postDotComText = $page(this).attr('href');
-    const url = new URL(postDotComText, homepageUrl);
+    const url = new URL(postDotComText, espnHomepageUrl);
     headlines[i] = {
       title: $page(this).text(),
       sport: postDotComText.split("/")[0],
@@ -33,11 +33,11 @@ const getHeadlines = ($page) => {
   return headlines.filter(headline => !headline.href.includes("/insider/"));
 };
 
-const getSports = ($page) => {
+export const getSports = ($page) => {
   const sports = [];
   $page(sportsSelector).each(function (i, elem) {
     const postDotComText = $page(this).attr('href');
-    const url = new URL(postDotComText, homepageUrl);
+    const url = new URL(postDotComText, espnHomepageUrl);
     sports[i] = {
       title: $page(this).text().trim().split("\n")[0].toLowerCase(),
       href: url.href,
@@ -52,7 +52,7 @@ const getSports = ($page) => {
   });
 }
 
-const getArticleText = async (articleUrl) => {
+export const getArticleText = async (articleUrl) => {
   const response = await axios.get(articleUrl);
   const html = response.data;
   const $ = cheerio.load(html);
@@ -79,7 +79,7 @@ const runCli = async () => {
   showTodaysUsage();
   console.log("Thanks for consuming sports headlines responsibly!");
   const spinner = ora("Getting headlines...").start();
-  const $homepage = await getPageContents(homepageUrl);
+  const $homepage = await getPageContents(espnHomepageUrl);
   spinner.succeed("ESPN headlines received");
   const homepageHeadlines = getHeadlines($homepage);
   const sports = getSports($homepage);

@@ -1,15 +1,23 @@
 {
-  "name": "nba-cli",
-  "version": "1.0.0",
-  "description": "",
+  "name": "espn",
+  "version": "0.0.1",
+  "description": "A CLI for getting sports headlines from ESPN",
   "main": "index.js",
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "espn": "node ./index.js"
   },
-  "keywords": [],
-  "author": "",
+  "homepage": "https://github.com/bradydowling/espn-cli",
+  "keywords": ["espn", "sports", "headlines", "articles", "cli"],
+  "bugs": {
+    "url" : "https://github.com/bradydowling/espn-cli/issues"
+  },
+  "funding": {
+    "type" : "individual",
+    "url" : "https://www.buymeacoffee.com/bradydowling"
+  },
+  "author": "Brady Dowling",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.21.1",
