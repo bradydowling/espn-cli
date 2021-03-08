@@ -1,5 +1,5 @@
 {
-  "name": "espn",
+  "name": "@rwxdev/espn",
   "version": "0.0.1",
   "description": "A CLI for getting sports headlines from ESPN",
   "main": "index.js",
